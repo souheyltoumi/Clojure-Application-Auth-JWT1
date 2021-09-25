@@ -7,7 +7,7 @@
 (defn save-image [image_path user email pass]
   (clojure.java.io/copy
    (clojure.java.io/file image_path)
-   (clojure.java.io/file (str "/home/g573134/Desktop/server_images/image_" (generate-signature user email) ".jpeg")))
+   (clojure.java.io/file (str "server_images/image_" (generate-signature user email) ".jpeg")))
   (get-user user pass))
 
 (defn add-user-sql [user email pass image_path]
