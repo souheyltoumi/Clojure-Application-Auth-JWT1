@@ -13,7 +13,10 @@
 (defn add-user-sql [user email pass image_path]
   (def query (str "insert into users (username,password,email) values (" "'" user "'," "'" pass "','" email "')"))
   (println query)
-  (sql/execute! db-spec [query]) (save-image image_path  user email pass))
+  (try
+    (sql/execute! db-spec [query]) (save-image image_path  user email pass)
+    (catch Exception e
+      (str (json/write-str {:login false})))))
 
 (defn register [req]
   {:status  200
